@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CryptoPrices.Core.Entities
 {
@@ -19,5 +17,7 @@ namespace CryptoPrices.Core.Entities
         public int Rank { get; set; }
 
         public DateTime LastUpdated { get; set; }
+
+        public virtual Quote Quote { get; set; }
     }
 }

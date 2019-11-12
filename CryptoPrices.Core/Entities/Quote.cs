@@ -19,5 +19,7 @@ namespace CryptoPrices.Core.Entities
         public decimal? MarketCap { get; set; }
 
         public DateTime LastUpdated { get; set; }
+
+        public virtual CryptoCurrency CryptoCurrency { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CryptoPrices.Core.Data;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -10,8 +11,17 @@ namespace CryptoPrices.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly CryptoPricesContext _context;
+
+        public HomeController(CryptoPricesContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
+            var currencies = _context.Cryptocurrencies.ToList();
+
             return View();
         }
 
