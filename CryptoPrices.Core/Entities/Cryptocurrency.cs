@@ -14,7 +14,7 @@ namespace CryptoPrices.Core.Entities
 
         public decimal? CirculatingSupply { get; set; }
 
-        public int Rank { get; set; }
+        public int? Rank { get; set; }
 
         public DateTime LastUpdated { get; set; }
 

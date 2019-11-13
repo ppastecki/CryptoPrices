@@ -6,7 +6,7 @@ namespace CryptoPrices.Core.Data
 {
     public class CryptoPricesContext : DbContext
     {
-        public DbSet<CryptoCurrency> Cryptocurrencies { get; set; }
+        public DbSet<CryptoCurrency> CryptoCurrencies { get; set; }
 
         public DbSet<Quote> Quotes { get; set; }
 

@@ -1,27 +1,59 @@
-﻿using System;
-using System.IO;
+﻿using CryptoPrices.Core.Data;
+using CryptoPrices.Core.Repositories;
+using CryptoPrices.Service.Configuration;
+using CryptoPrices.Service.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 
 namespace CryptoPrices.Service
 {
     public static class Program
     {
-        private const string ApiKey = "ea8c99fb-49ac-4621-a366-ce3a00f244b3";
+        private static IConfiguration _configuration;
+        private static IServiceProvider _serviceProvider;
 
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            using (var client = new WebClient())
+            _configuration = GetConfiguration();
+            _serviceProvider = ConfigureServices().BuildServiceProvider();
+
+            var importer = _serviceProvider.GetService<ICoinmarketImporter>();
+            await importer.Import();
+        }
+
+        private static IServiceCollection ConfigureServices()
+        {
+            var configuration = GetConfiguration();
+            var services = new ServiceCollection();
+
+            services.AddDbContext<CryptoPricesContext>(options =>
             {
-                client.Headers.Add("X-CMC_PRO_API_KEY", ApiKey);
-                client.Headers.Add("Accepts", "application/json");
+                var connectionString = configuration.GetConnectionString("CryptoPrices");
+                var migrationsAssembly = typeof(CryptoPricesContext).Assembly.FullName;
 
-                var url = new UriBuilder("https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
-                url.Query = $"start=1&limit=5000&convert=USD";
+                options.UseSqlServer(connectionString, action => action.MigrationsAssembly(migrationsAssembly));
+            });
 
-                var result = client.DownloadString(url.ToString());
-                File.WriteAllText(@"c:\src\prices.json", result);
-            }
+            services.AddSingleton(provider => _configuration.GetSection("ServiceConfiguration").Get<ServiceConfiguration>());
+
+            services.AddTransient<ICoinmarketClient, CoinmarketClient>();
+            services.AddTransient<ICoinmarketImporter, CoinmarketImporter>();
+            services.AddTransient<ICoinmarketParser, CoinmarketParser>();
+            services.AddTransient<ICryptocurrencyRepository, CryptocurrencyRepository>();
+            services.AddTransient<WebClient>();
+
+            return services;
+        }
+
+        private static IConfiguration GetConfiguration()
+        {
+            return new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
         }
     }
 }

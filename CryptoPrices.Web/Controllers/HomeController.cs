@@ -20,7 +20,7 @@ namespace CryptoPrices.Web.Controllers
 
         public IActionResult Index()
         {
-            var currencies = _context.Cryptocurrencies.ToList();
+            var currencies = _context.CryptoCurrencies.ToList();
 
             return View();
         }

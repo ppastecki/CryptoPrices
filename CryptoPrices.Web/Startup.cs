@@ -28,8 +28,13 @@ namespace CryptoPrices.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            var connectionString = Configuration.GetConnectionString("CryptoPrices");
-            services.AddDbContext<CryptoPricesContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<CryptoPricesContext>(options =>
+            {
+                var connectionString = Configuration.GetConnectionString("CryptoPrices");
+                var migrationsAssembly = typeof(CryptoPricesContext).Assembly.FullName;
+
+                options.UseSqlServer(connectionString, action => action.MigrationsAssembly(migrationsAssembly));
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
