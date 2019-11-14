@@ -5,21 +5,23 @@ using CryptoPrices.Service.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
-using System.Net;
 using Topshelf;
 
 namespace CryptoPrices.Service
 {
-    public static class Program
+    public class Program
     {
         private static IConfiguration _configuration;
         private static IServiceProvider _serviceProvider;
+        private static ILogger<Program> _logger;
 
         public static void Main(string[] args)
         {
             _configuration = GetConfiguration();
             _serviceProvider = ConfigureServices().BuildServiceProvider();
+            _logger = _serviceProvider.GetService<ILogger<Program>>();
 
             HostFactory.Run(x =>
             {
@@ -27,6 +29,10 @@ namespace CryptoPrices.Service
                 x.EnableServiceRecovery(r => r.RestartService(TimeSpan.FromSeconds(30)));
                 x.SetServiceName("CryptoPricesService");
                 x.StartAutomatically();
+                x.OnException(ex =>
+                {
+                    _logger.LogError($"{DateTime.UtcNow}: {nameof(ImportService)} has thrown exception.", ex);
+                });
             });
         }
 
@@ -42,6 +48,10 @@ namespace CryptoPrices.Service
 
                 options.UseSqlServer(connectionString, action => action.MigrationsAssembly(migrationsAssembly));
             });
+
+            services.AddLogging(options => options.AddConsole())
+                .AddSingleton<ImportService>()
+                .AddSingleton<Program>();
 
             services.AddSingleton(provider => _configuration.GetSection("ServiceConfiguration").Get<ServiceConfiguration>());
             services.AddSingleton<ImportService>();
