@@ -24,12 +24,12 @@ namespace CryptoPrices.Core.Migrations
                     b.Property<int>("Id");
 
                     b.Property<decimal?>("CirculatingSupply")
-                        .HasColumnType("decimal");
+                        .HasColumnType("decimal(18,5)");
 
                     b.Property<DateTime>("LastUpdated");
 
                     b.Property<decimal?>("MaxSupply")
-                        .HasColumnType("decimal");
+                        .HasColumnType("decimal(18,5)");
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -40,7 +40,7 @@ namespace CryptoPrices.Core.Migrations
                         .IsRequired();
 
                     b.Property<decimal?>("TotalSupply")
-                        .HasColumnType("decimal");
+                        .HasColumnType("decimal(18,5)");
 
                     b.HasKey("Id");
 
@@ -54,22 +54,22 @@ namespace CryptoPrices.Core.Migrations
                     b.Property<DateTime>("LastUpdated");
 
                     b.Property<decimal?>("MarketCap")
-                        .HasColumnType("decimal");
+                        .HasColumnType("decimal(18,5)");
 
                     b.Property<decimal?>("PercentChange1h")
-                        .HasColumnType("decimal");
+                        .HasColumnType("decimal(18,5)");
 
                     b.Property<decimal?>("PercentChange24h")
-                        .HasColumnType("decimal");
+                        .HasColumnType("decimal(18,5)");
 
                     b.Property<decimal?>("PercentChange7d")
-                        .HasColumnType("decimal");
+                        .HasColumnType("decimal(18,5)");
 
                     b.Property<decimal?>("Price")
-                        .HasColumnType("decimal");
+                        .HasColumnType("decimal(18,5)");
 
                     b.Property<decimal?>("Volume24h")
-                        .HasColumnType("decimal");
+                        .HasColumnType("decimal(18,5)");
 
                     b.HasKey("CryptoCurrencyId");
 

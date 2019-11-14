@@ -14,9 +14,9 @@ namespace CryptoPrices.Core.Migrations
                     Id = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Symbol = table.Column<string>(nullable: false),
-                    MaxSupply = table.Column<decimal>(type: "decimal", nullable: true),
-                    CirculatingSupply = table.Column<decimal>(type: "decimal", nullable: true),
-                    TotalSupply = table.Column<decimal>(type: "decimal", nullable: true),
+                    MaxSupply = table.Column<decimal>(type: "decimal(18,5)", nullable: true),
+                    CirculatingSupply = table.Column<decimal>(type: "decimal(18,5)", nullable: true),
+                    TotalSupply = table.Column<decimal>(type: "decimal(18,5)", nullable: true),
                     Rank = table.Column<int>(nullable: true),
                     LastUpdated = table.Column<DateTime>(nullable: false)
                 },
@@ -30,12 +30,12 @@ namespace CryptoPrices.Core.Migrations
                 columns: table => new
                 {
                     CryptoCurrencyId = table.Column<int>(nullable: false),
-                    Price = table.Column<decimal>(type: "decimal", nullable: true),
-                    Volume24h = table.Column<decimal>(type: "decimal", nullable: true),
-                    PercentChange1h = table.Column<decimal>(type: "decimal", nullable: true),
-                    PercentChange24h = table.Column<decimal>(type: "decimal", nullable: true),
-                    PercentChange7d = table.Column<decimal>(type: "decimal", nullable: true),
-                    MarketCap = table.Column<decimal>(type: "decimal", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,5)", nullable: true),
+                    Volume24h = table.Column<decimal>(type: "decimal(18,5)", nullable: true),
+                    PercentChange1h = table.Column<decimal>(type: "decimal(18,5)", nullable: true),
+                    PercentChange24h = table.Column<decimal>(type: "decimal(18,5)", nullable: true),
+                    PercentChange7d = table.Column<decimal>(type: "decimal(18,5)", nullable: true),
+                    MarketCap = table.Column<decimal>(type: "decimal(18,5)", nullable: true),
                     LastUpdated = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

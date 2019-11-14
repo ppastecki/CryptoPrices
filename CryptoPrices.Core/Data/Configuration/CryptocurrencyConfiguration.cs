@@ -24,15 +24,15 @@ namespace CryptoPrices.Core.Data.Configuration
 
             builder
                 .Property(x => x.MaxSupply)
-                .HasColumnType("decimal");
+                .HasColumnType("decimal(18,5)");
 
             builder
                 .Property(x => x.CirculatingSupply)
-                .HasColumnType("decimal");
+                .HasColumnType("decimal(18,5)");
 
             builder
                 .Property(x => x.TotalSupply)
-                .HasColumnType("decimal");
+                .HasColumnType("decimal(18,5)");
 
             builder
                 .Property(x => x.LastUpdated)

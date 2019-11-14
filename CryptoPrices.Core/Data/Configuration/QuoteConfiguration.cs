@@ -12,27 +12,27 @@ namespace CryptoPrices.Core.Data.Configuration
 
             builder
                 .Property(x => x.Price)
-                .HasColumnType("decimal");
+                .HasColumnType("decimal(18,5)");
 
             builder
                 .Property(x => x.Volume24h)
-                .HasColumnType("decimal");
+                .HasColumnType("decimal(18,5)");
 
             builder
                 .Property(x => x.PercentChange1h)
-                .HasColumnType("decimal");
+                .HasColumnType("decimal(18,5)");
 
             builder
                 .Property(x => x.PercentChange24h)
-                .HasColumnType("decimal");
+                .HasColumnType("decimal(18,5)");
 
             builder
                 .Property(x => x.PercentChange7d)
-                .HasColumnType("decimal");
+                .HasColumnType("decimal(18,5)");
 
             builder
                 .Property(x => x.MarketCap)
-                .HasColumnType("decimal");
+                .HasColumnType("decimal(18,5)");
 
             builder
                 .Property(x => x.LastUpdated)
