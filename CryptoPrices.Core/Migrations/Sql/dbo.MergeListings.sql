@@ -12,11 +12,12 @@ BEGIN
 			t.Symbol = s.Symbol,
 			t.MaxSupply = s.MaxSupply,
 			t.CirculatingSupply = s.CirculatingSupply,
+			t.TotalSupply = s.TotalSupply,
 			t.Rank = s.Rank,
 			t.LastUpdated = s.LastUpdated
 	WHEN NOT MATCHED BY TARGET THEN
-		INSERT (Id, Name, Symbol, MaxSupply, CirculatingSupply, Rank, LastUpdated)
-		VALUES (s.Id, s.Name, s.Symbol, s.MaxSupply, s.CirculatingSupply, s.Rank, s.LastUpdated)
+		INSERT (Id, Name, Symbol, MaxSupply, CirculatingSupply, TotalSupply, Rank, LastUpdated)
+		VALUES (s.Id, s.Name, s.Symbol, s.MaxSupply, s.CirculatingSupply, s.TotalSupply, s.Rank, s.LastUpdated)
 	WHEN NOT MATCHED BY SOURCE THEN
 		DELETE;
 

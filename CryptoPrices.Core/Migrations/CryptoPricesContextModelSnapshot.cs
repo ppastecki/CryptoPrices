@@ -39,6 +39,9 @@ namespace CryptoPrices.Core.Migrations
                     b.Property<string>("Symbol")
                         .IsRequired();
 
+                    b.Property<decimal?>("TotalSupply")
+                        .HasColumnType("decimal");
+
                     b.HasKey("Id");
 
                     b.ToTable("CryptoCurrencies");

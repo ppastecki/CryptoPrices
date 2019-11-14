@@ -16,6 +16,7 @@ namespace CryptoPrices.Core.Migrations
                     Symbol = table.Column<string>(nullable: false),
                     MaxSupply = table.Column<decimal>(type: "decimal", nullable: true),
                     CirculatingSupply = table.Column<decimal>(type: "decimal", nullable: true),
+                    TotalSupply = table.Column<decimal>(type: "decimal", nullable: true),
                     Rank = table.Column<int>(nullable: true),
                     LastUpdated = table.Column<DateTime>(nullable: false)
                 },

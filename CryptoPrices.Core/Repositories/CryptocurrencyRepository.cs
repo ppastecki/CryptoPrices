@@ -41,6 +41,7 @@ namespace CryptoPrices.Core.Repositories
             table.Columns.Add("Symbol", typeof(string));
             table.Columns.Add("MaxSupply", typeof(decimal));
             table.Columns.Add("CirculatingSupply", typeof(decimal));
+            table.Columns.Add("TotalSupply", typeof(decimal));
             table.Columns.Add("Rank", typeof(int));
             table.Columns.Add("LastUpdated", typeof(DateTime));
 
@@ -53,6 +54,7 @@ namespace CryptoPrices.Core.Repositories
                 row["Symbol"] = currency.Symbol;
                 row["MaxSupply"] = GetSqlValue(currency.MaxSupply);
                 row["CirculatingSupply"] = GetSqlValue(currency.CirculatingSupply);
+                row["TotalSupply"] = GetSqlValue(currency.TotalSupply);
                 row["Rank"] = GetSqlValue(currency.Rank);
                 row["LastUpdated"] = currency.LastUpdated;
 

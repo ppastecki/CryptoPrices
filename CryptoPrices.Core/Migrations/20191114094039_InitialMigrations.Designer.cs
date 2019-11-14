@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CryptoPrices.Core.Migrations
 {
     [DbContext(typeof(CryptoPricesContext))]
-    [Migration("20191113232948_dbo.CryptoCurrency")]
-    partial class dboCryptoCurrency
+    [Migration("20191114094039_InitialMigrations")]
+    partial class InitialMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,6 +40,9 @@ namespace CryptoPrices.Core.Migrations
 
                     b.Property<string>("Symbol")
                         .IsRequired();
+
+                    b.Property<decimal?>("TotalSupply")
+                        .HasColumnType("decimal");
 
                     b.HasKey("Id");
 

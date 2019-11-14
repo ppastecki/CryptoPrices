@@ -6,6 +6,7 @@ AS TABLE
 	Symbol nvarchar(max) NOT NULL,
 	MaxSupply decimal(18, 0) NULL,
 	CirculatingSupply decimal(18, 0) NULL,
+	TotalSupply decimal(18, 0) NULL,
 	Rank int NULL,
 	LastUpdated datetime2(7) NOT NULL
 )

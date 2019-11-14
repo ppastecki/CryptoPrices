@@ -44,6 +44,7 @@ namespace CryptoPrices.Service.Services
                     Symbol = currencyObj.symbol,
                     MaxSupply = currencyObj.max_supply,
                     CirculatingSupply = currencyObj.circulating_supply,
+                    TotalSupply = currencyObj.total_supply,
                     Rank = currencyObj.cmc_rank,
                     LastUpdated = currencyObj.last_updated,
                     Quote = quote

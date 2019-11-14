@@ -31,6 +31,10 @@ namespace CryptoPrices.Core.Data.Configuration
                 .HasColumnType("decimal");
 
             builder
+                .Property(x => x.TotalSupply)
+                .HasColumnType("decimal");
+
+            builder
                 .Property(x => x.LastUpdated)
                 .IsRequired();
         }
