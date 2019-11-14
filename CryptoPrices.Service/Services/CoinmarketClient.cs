@@ -6,40 +6,31 @@ using System.Web;
 
 namespace CryptoPrices.Service.Services
 {
-    public class CoinmarketClient : ICoinmarketClient, IDisposable
+    public class CoinmarketClient : ICoinmarketClient
     {
         private readonly ServiceConfiguration _serviceConfiguration;
-        private readonly WebClient _webClient;
 
-        public CoinmarketClient(ServiceConfiguration serviceConfiguration, WebClient webClient)
+        public CoinmarketClient(ServiceConfiguration serviceConfiguration)
         {
             _serviceConfiguration = serviceConfiguration;
-            _webClient = webClient;
         }
 
         public async Task<string> GetLatestListings()
         {
-            _webClient.Headers.Add("X-CMC_PRO_API_KEY", _serviceConfiguration.CoinmarketApiKey);
-            _webClient.Headers.Add("Accepts", "application/json");
-
-            var query = HttpUtility.ParseQueryString(string.Empty);
-            query["start"] = _serviceConfiguration.CoinmarketStart.ToString();
-            query["limit"] = _serviceConfiguration.CoinmarketLimit.ToString();
-            query["convert"] = _serviceConfiguration.CoinmarketConvert;
-
-            var builder = new UriBuilder(_serviceConfiguration.CoinmarketLatestListingsUrl);
-            builder.Query = query.ToString();
-
-            return await _webClient.DownloadStringTaskAsync(builder.Uri);
-        }
-
-        public void Dispose()
-        {
-            var webClient = _webClient;
-
-            if (webClient != null)
+            using (var webClient = new WebClient())
             {
-                webClient.Dispose();
+                webClient.Headers.Add("X-CMC_PRO_API_KEY", _serviceConfiguration.CoinmarketApiKey);
+                webClient.Headers.Add("Accepts", "application/json");
+
+                var query = HttpUtility.ParseQueryString(string.Empty);
+                query["start"] = _serviceConfiguration.CoinmarketStart.ToString();
+                query["limit"] = _serviceConfiguration.CoinmarketLimit.ToString();
+                query["convert"] = _serviceConfiguration.CoinmarketConvert;
+
+                var builder = new UriBuilder(_serviceConfiguration.CoinmarketLatestListingsUrl);
+                builder.Query = query.ToString();
+
+                return await webClient.DownloadStringTaskAsync(builder.Uri);
             }
         }
     }

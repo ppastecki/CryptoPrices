@@ -19,5 +19,8 @@ namespace CryptoPrices.Service.Configuration
 
         [JsonProperty("CoinmarketConvert")]
         public string CoinmarketConvert { get; set; }
+
+        [JsonProperty("ImporterPeriod")]
+        public int ImporterPeriod { get; set; }
     }
 }

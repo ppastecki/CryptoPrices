@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net;
-using System.Threading.Tasks;
+using Topshelf;
 
 namespace CryptoPrices.Service
 {
@@ -16,13 +16,18 @@ namespace CryptoPrices.Service
         private static IConfiguration _configuration;
         private static IServiceProvider _serviceProvider;
 
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             _configuration = GetConfiguration();
             _serviceProvider = ConfigureServices().BuildServiceProvider();
 
-            var importer = _serviceProvider.GetService<ICoinmarketImporter>();
-            await importer.Import();
+            HostFactory.Run(x =>
+            {
+                x.Service(() => _serviceProvider.GetService<ImportService>());
+                x.EnableServiceRecovery(r => r.RestartService(TimeSpan.FromSeconds(30)));
+                x.SetServiceName("CryptoPricesService");
+                x.StartAutomatically();
+            });
         }
 
         private static IServiceCollection ConfigureServices()
@@ -39,12 +44,12 @@ namespace CryptoPrices.Service
             });
 
             services.AddSingleton(provider => _configuration.GetSection("ServiceConfiguration").Get<ServiceConfiguration>());
+            services.AddSingleton<ImportService>();
 
             services.AddTransient<ICoinmarketClient, CoinmarketClient>();
             services.AddTransient<ICoinmarketImporter, CoinmarketImporter>();
             services.AddTransient<ICoinmarketParser, CoinmarketParser>();
             services.AddTransient<ICryptocurrencyRepository, CryptocurrencyRepository>();
-            services.AddTransient<WebClient>();
 
             return services;
         }
