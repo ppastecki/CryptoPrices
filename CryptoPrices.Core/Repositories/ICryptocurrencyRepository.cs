@@ -6,6 +6,10 @@ namespace CryptoPrices.Core.Repositories
 {
     public interface ICryptocurrencyRepository
     {
-        Task Merge(IEnumerable<CryptoCurrency> currencies);
+        Task<CryptoCurrency> GetAsync(int id);
+
+        Task<IEnumerable<CryptoCurrency>> GetAllAsync();
+
+        Task MergeAsync(IEnumerable<CryptoCurrency> currencies);
     }
 }

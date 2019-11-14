@@ -1,0 +1,61 @@
+﻿@model CryptoPrices.Web.Models.CryptoCurrencyDetails
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Model.Name</h1>
+</div>
+
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <td>Name</td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td>Symbol</td>
+            <td>@Model.Symbol</td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td>@Model.Price</td>
+        </tr>
+        <tr>
+            <td>Circulating Supply</td>
+            <td>@Model.CirculatingSupply</td>
+        </tr>
+        <tr>
+            <td>Total Supply</td>
+            <td>@Model.TotalSupply</td>
+        </tr>
+        <tr>
+            <td>Max Supply</td>
+            <td>@Model.MaxSupply</td>
+        </tr>
+        <tr>
+            <td>Volume 24h</td>
+            <td>@Model.Volume24h</td>
+        </tr>
+        <tr>
+            <td>Market Cap</td>
+            <td>@Model.MarketCap</td>
+        </tr>
+        <tr>
+            <td>1h Percent Change</td>
+            <td>@Model.PercentChange1h</td>
+        </tr>
+        <tr>
+            <td>24h Percent Change</td>
+            <td>@Model.PercentChange24h</td>
+        </tr>
+        <tr>
+            <td>7d Percent Change</td>
+            <td>@Model.PercentChange7d</td>
+        </tr>
+        <tr>
+            <td>Last Update Time</td>
+            <td>@Model.LastUpdated</td>
+        </tr>
+    </tbody>
+</table>

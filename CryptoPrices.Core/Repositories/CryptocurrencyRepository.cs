@@ -19,7 +19,23 @@ namespace CryptoPrices.Core.Repositories
             _context = context;
         }
 
-        public async Task Merge(IEnumerable<CryptoCurrency> currencies)
+        public async Task<CryptoCurrency> GetAsync(int id)
+        {
+            return await _context
+                .CryptoCurrencies
+                .Include(c => c.Quote)
+                .SingleOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task<IEnumerable<CryptoCurrency>> GetAllAsync()
+        {
+            return await _context
+                .CryptoCurrencies
+                .Include(c => c.Quote)
+                .ToListAsync();
+        }
+
+        public async Task MergeAsync(IEnumerable<CryptoCurrency> currencies)
         {
             var quotes = currencies
                 .Where(c => c.Quote != null)

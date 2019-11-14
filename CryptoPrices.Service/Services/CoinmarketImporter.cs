@@ -22,7 +22,7 @@ namespace CryptoPrices.Service.Services
             var json = await _coinmarketClient.GetLatestListings();
             var cryptoCurrencies = _coinmarketParser.ParseLatestListings(json);
 
-            await _cryptocurrencyRepository.Merge(cryptoCurrencies);
+            await _cryptocurrencyRepository.MergeAsync(cryptoCurrencies);
         }
     }
 }

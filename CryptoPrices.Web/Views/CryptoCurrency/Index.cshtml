@@ -1,0 +1,35 @@
+﻿@model IEnumerable<CryptoPrices.Web.Models.CryptoCurrency>
+@{
+    ViewData["Title"] = "Crypto Currencies";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Crypto Currencies</h1>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Symbol</th>
+            <th scope="col">Price</th>
+            <th scope="col">Market Cap</th>
+            <th scope="col">Volume 24h</th>
+            <th scope="col">24h Percent Change</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var currency in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(currency.Name, "Details", new { id = currency.Id })</td>
+                <td>@currency.Symbol</td>
+                <td>@currency.Price</td>
+                <td>@currency.MarketCap</td>
+                <td>@currency.Volume24h</td>
+                <td>@currency.PercentChange24h</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
