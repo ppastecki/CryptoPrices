@@ -1,4 +1,7 @@
-﻿using CryptoPrices.Core.Data;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using CryptoPrices.Core.Data;
 using CryptoPrices.Core.ModelFactories;
 using CryptoPrices.Core.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -7,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 namespace CryptoPrices.Api
 {
@@ -33,6 +37,15 @@ namespace CryptoPrices.Api
 
             services.AddSingleton<ICryptoCurrencyModelFactory, CryptoCurrencyModelFactory>();
             services.AddTransient<ICryptocurrencyRepository, CryptocurrencyRepository>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Crypto Prices", Version = "v1" });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -48,6 +61,14 @@ namespace CryptoPrices.Api
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Crypto Prices v1");
+                c.RoutePrefix = string.Empty;
+            });
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using CryptoPrices.Core.ModelFactories;
+﻿using System.Net.Mime;
+using System.ComponentModel.DataAnnotations;
+using CryptoPrices.Core.ModelFactories;
 using CryptoPrices.Core.Models;
 using CryptoPrices.Core.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -22,16 +24,18 @@ namespace CryptoPrices.Api.Controllers
 
         // GET: api/CryptoCurrency
         [HttpGet]
+        [Produces(MediaTypeNames.Application.Json)]
         public async Task<ActionResult<IEnumerable<CryptoCurrency>>> GetCryptoCurrencies()
         {
             var currencies = await _cryptocurrencyRepository.GetAllAsync();
             var model = _cryptoCurrencyModelFactory.GetIndexModel(currencies);
 
-            return Ok(model);
+            return new JsonResult(model);
         }
 
         // GET: api/CryptoCurrency/5
         [HttpGet("{id}")]
+        [Produces(MediaTypeNames.Application.Json)]
         public async Task<ActionResult<CryptoCurrency>> GetCryptoCurrency(int id)
         {
             var currency = await _cryptocurrencyRepository.GetAsync(id);
@@ -43,7 +47,7 @@ namespace CryptoPrices.Api.Controllers
 
             var model = _cryptoCurrencyModelFactory.GetDetailsModel(currency);
 
-            return Ok(model);
+            return new JsonResult(model);
         }
     }
 }

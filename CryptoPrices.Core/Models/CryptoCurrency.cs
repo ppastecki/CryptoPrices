@@ -1,11 +1,16 @@
-﻿namespace CryptoPrices.Core.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CryptoPrices.Core.Models
 {
     public class CryptoCurrency
     {
+        [Key]
         public int Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         public string Symbol { get; set; }
 
         public decimal? Price { get; set; }

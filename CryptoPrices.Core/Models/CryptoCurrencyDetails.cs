@@ -1,13 +1,17 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace CryptoPrices.Core.Models
 {
     public class CryptoCurrencyDetails
     {
+        [Key]
         public int Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         public string Symbol { get; set; }
 
         public decimal? MaxSupply { get; set; }
@@ -28,6 +32,7 @@ namespace CryptoPrices.Core.Models
 
         public decimal? MarketCap { get; set; }
 
+        [Required]
         public DateTime LastUpdated { get; set; }
     }
 }
