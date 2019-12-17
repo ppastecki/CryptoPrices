@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CryptoPrices.Web.ModelFactories
+namespace CryptoPrices.Core.ModelFactories
 {
     public interface ICryptoCurrencyModelFactory
     {

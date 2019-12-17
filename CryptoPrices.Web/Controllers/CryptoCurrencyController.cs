@@ -1,5 +1,5 @@
-﻿using CryptoPrices.Core.Repositories;
-using CryptoPrices.Web.ModelFactories;
+﻿using CryptoPrices.Core.ModelFactories;
+using CryptoPrices.Core.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

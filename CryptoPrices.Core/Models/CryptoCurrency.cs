@@ -1,4 +1,4 @@
-﻿namespace CryptoPrices.Web.Models
+﻿namespace CryptoPrices.Core.Models
 {
     public class CryptoCurrency
     {

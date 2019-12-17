@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace CryptoPrices.Web.ModelFactories
+namespace CryptoPrices.Core.ModelFactories
 {
     public class CryptoCurrencyModelFactory : ICryptoCurrencyModelFactory
     {

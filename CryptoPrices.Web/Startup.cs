@@ -1,6 +1,6 @@
 ﻿using CryptoPrices.Core.Data;
+using CryptoPrices.Core.ModelFactories;
 using CryptoPrices.Core.Repositories;
-using CryptoPrices.Web.ModelFactories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

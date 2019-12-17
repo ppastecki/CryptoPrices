@@ -1,4 +1,4 @@
-﻿using CryptoPrices.Web.Models;
+﻿using CryptoPrices.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
