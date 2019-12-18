@@ -4,7 +4,6 @@ namespace CryptoPrices.Core.Models
 {
     public class CryptoCurrency
     {
-        [Key]
         public int Id { get; set; }
 
         [Required]

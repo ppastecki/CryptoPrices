@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using CryptoPrices.Core.Data;
+﻿using CryptoPrices.Core.Data;
 using CryptoPrices.Core.ModelFactories;
 using CryptoPrices.Core.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace CryptoPrices.Api
 {
@@ -59,9 +59,7 @@ namespace CryptoPrices.Api
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseMvc();
-
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>

@@ -6,6 +6,7 @@ using CryptoPrices.Core.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace CryptoPrices.Api.Controllers
 {
@@ -36,7 +37,9 @@ namespace CryptoPrices.Api.Controllers
         // GET: api/CryptoCurrency/5
         [HttpGet("{id}")]
         [Produces(MediaTypeNames.Application.Json)]
-        public async Task<ActionResult<CryptoCurrency>> GetCryptoCurrency(int id)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CryptoCurrencyDetails))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<CryptoCurrencyDetails>> GetCryptoCurrency(int id)
         {
             var currency = await _cryptocurrencyRepository.GetAsync(id);
 

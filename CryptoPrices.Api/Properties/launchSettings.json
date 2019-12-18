@@ -12,6 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
+      "launchUrl": "http://acme:52415",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

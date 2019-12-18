@@ -5,7 +5,6 @@ namespace CryptoPrices.Core.Models
 {
     public class CryptoCurrencyDetails
     {
-        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -32,7 +31,6 @@ namespace CryptoPrices.Core.Models
 
         public decimal? MarketCap { get; set; }
 
-        [Required]
         public DateTime LastUpdated { get; set; }
     }
 }
